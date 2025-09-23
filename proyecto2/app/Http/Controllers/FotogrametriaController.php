@@ -4,11 +4,13 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Fotogrametria;
+use App\Models\Aviso;
 class FotogrametriaController extends Controller
 {
     public function index() {
         $fotogramas = Fotogrametria::latest()->take(5)->get();
-        return view('fotogrametria.index', compact('fotogramas'));
+        $aviso = Aviso::latest()->first(); //Ultimo aviso (primero)
+        return view('fotogrametria.index', compact('fotogramas', 'aviso'));
     }
 
     public function store(Request $request) {

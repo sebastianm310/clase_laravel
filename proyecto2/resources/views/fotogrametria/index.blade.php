@@ -6,8 +6,14 @@
         <title>Fotogrametría</title>
     </head>
     <body>
-        
+
         <h1>Captura de fotograma (Fotogrametría)</h1>
+        
+        @if ($aviso)
+            <div style="padding:10px; background-color: lightgreen; border: 1px solid green;">
+                {{ $aviso->mensaje }}
+            </div>
+        @endif
 
         <video id="video" width="400" autoplay></video>
         <canvas id="canvas" width="400" height="300" style="display:none;"></canvas>
@@ -17,7 +23,7 @@
         @foreach ($fotogramas as $foto)
             <img src="{{ $foto->imagen }}" width="200" style="margin:5px;">
         @endforeach
-
+        
         <script>
 
             const video = document.getElementById('video');
@@ -29,9 +35,9 @@
             navigator.mediaDevices.getUserMedia({ video:true }).then(stream => {
                 video.srcObject = stream;
                 //Apagar camara despues de 10 segundos
-                setTimeout(() => {
+                /*setTimeout(() => {
                     stream.getTracks().forEach(track => track.stop());
-                }, 10000);
+                }, 10000);*/
             }).catch(err => console.error("Error: ", err));
 
             //Capturar y enviar fotograma
@@ -49,7 +55,6 @@
                 .then(data => alert(data.message))
                 .catch(err => console.error(err));
             })
-
         </script>
     </body>
 </html>

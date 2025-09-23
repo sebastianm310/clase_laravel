@@ -16,6 +16,11 @@ return new class extends Migration
             $table->longText('imagen'); //Base 64 del fotograma
             $table->timestamps();
         });
+        Schema::create('avisos', function (Blueprint $table) {
+            $table->id();
+            $table->string('mensaje');
+            $table->timestamps();
+        });
     }
 
     /**
@@ -24,5 +29,6 @@ return new class extends Migration
     public function down(): void
     {
         Schema::dropIfExists('fotogrametria');
+        Schema::dropIfExists('avisos');
     }
 };
